@@ -11,6 +11,7 @@ class News(models.Model):
         ('analysis', 'Analysis'),
     ]
     
+    #model
     name = models.CharField(max_length=255)
     price = models.IntegerField(default=0)
     stock = models.IntegerField(default=0)
