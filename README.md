@@ -1,4 +1,4 @@
-link : https://afero-aqil-footballnews.pbp.cs.ui.ac.id/        
+link : https://afero-aqil-allmightystore.pbp.cs.ui.ac.id/    
 Nama : Afero Aqil Roihan
 NPM  : 2406352304
 Kelas: PBP D
