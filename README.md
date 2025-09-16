@@ -19,6 +19,7 @@ Cara saya membuat aplikasi main pada django, merouting, dan menghubungan ke PWS:
 
 request client ke web aplikasi berbasis Django dan  kaitan antara urls.py, views.py, models.py, dan berkas html.:
 ![alt text](image.png)
+
 sumber gambar (hal 3) : https://scele.cs.ui.ac.id/pluginfile.php/269605/mod_resource/content/1/03%20-%20MTV%20Django%20Architecture.pdf
 
 Alur dan hubungan antar urls.py, views.py, models.py, dan berkas html :
@@ -38,6 +39,7 @@ Alasan framework Django dijadikan permulaan pembelajaran pengembangan perangkat 
 Sumber : https://www.geeksforgeeks.org/blogs/top-10-reasons-to-choose-django-framework-for-your-project/
 
 Feedback untuk Tutorial 1: Tidak ada.
+<
 
 Tugas 3
 
