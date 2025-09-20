@@ -14,7 +14,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField(default=0)
     stock = models.IntegerField(default=0)
-    product_views = models.PositiveIntegerField(default=0)
+    # product_views = models.PositiveIntegerField(default=0)
     description = models.TextField()
     thumbnail = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='update')
