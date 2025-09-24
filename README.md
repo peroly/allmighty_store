@@ -115,6 +115,133 @@ XML by ID
 JSON by ID
 ![alt text](image-4.png)
 
+Tugas 4
+
+1. Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
+    Django AuthenticationForm adalah form yang sudah disediakan oleh django untuk fitur login user beserta autentikasi yang diperlukan pada proses login tersebut.
+    Kelebihan : 
+    - Sudah disediakan template, sehingga tidak perlu membuat tampilan login dan fungsinya dari awal.
+    - Sudah mengimplementasi standar prosedur keamanan autentikasi untuk proses login, seperti password yang sudah  dihash.
+
+    Kekurangan:
+    - Jika ingin menambahkan fitur lain pada fungsi login, harus menambahkan sendiri fiturnya, seperti fitur login dengan email, fitur autentikasi tambahan berupa CAPTCHA, dan sebagainya.
+
+2. Apa perbedaan antara autentikasi dan otorisasi? Bagaiamana Django mengimplementasikan kedua konsep tersebut?
+    Autentikasi : Memastikan identitas user.
+    Otorisasi : Membatasi dan memberi akses yang sesuai untuk user.
+
+    Bagaimana Django mengimplementasikannya:
+    1. Autentikasi : Contohnya  adalah AuthenticationForm pada saat login. Banyak prosedur keamanan yang dilakukan django dalam proses autentikasi, contohnya adalah password yang disimpan tidak dalam bentuk aslinya, melainkan bentuk hash dari password tersebut.
+
+    2. Otorisasi : Contoh dalam code ini ialah decorator berupa @login_required yang terdapat di fungsi show_main dan show_product. Hal ini memungkinkan hanya user yang sudah login saja yang dapat mengakses fungsi-fungsi tersebut.
+
+3. Apa saja kelebihan dan kekurangan session dan cookies dalam konteks menyimpan state di aplikasi web?
+
+Cookies 
+Kelebihan:
+- State disimpan di browser, sehingga tidak perlu menyimpannya di server.
+- Bisa bertahan lama, sehingga jika user memiliki preferensi tertentu pada suatu website dan preferensi tersebut disimpan pada cookies, user tidak perlu mengatur ulang preferensinya kembali.
+
+Kekurangan:
+- Kemanan yang rendah (secara default).
+- Karena state disimpan di browser, maka state yang dapat disimpan di cookies hanya sedikit, yaitu 4 KB.
+
+Session:
+Kelebihan:
+- Lebih aman, karena user hanya bisa melihat sessionid.
+- State disimpan di server, sehingga dapat menyimpan lebih banyak state.
+
+Kekurangan:
+- Masih membutuhkan cookies, jika tidak ada cookies maka tidak ada session.
+- State disimpan di server, sehingga perlu storage server.
+
+4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai? Bagaimana Django menangani hal tersebut?
+
+    Penggunaan cookies tidak aman secara default, salah satu resiko yang dapat terjadi ialah jika penyerang mendapatkan cookies dari korban, sehingga penyerang dapat mengirimkan REQUEST yang tidak sah ke server.
+
+    Cara Django mengatasi ini ialah dengan CSRF token, sehingga walaupun penyerang menggunakan cookies dari korban, jika CSRF token-nya beda, maka penyerang tidak dapat mengirimkan REQUEST.
+
+5. Implementasi Checklist
+    - Implementasi fungsi registrasi, login, dan logout, serta mengharuskan user untuk login demi mengakses beberapa fungsi.
+        1. Import library django yang dibutuhkan untuk registrasi, login, dan logout di views.py .
+            from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+            from django.contrib.auth import authenticate, login, logout
+            from django.contrib.auth.decorators import login_required
+
+        2. Membuat masing-masing fungsi dari login, register, dan logout di views.py
+        3. Membuat tampilan html dari login di login.html, register di register.html, dan logout di main.html .
+        4. Import semua fungsi dan konfigurasi semua url dari fungsi di urls.py .
+        5. Restriksi akses show_main() dan show_product() hanya untuk user yang sudah login dengan meletakkan decorator  @login_required(login_url='/login') di atas dua fungsi tersebut di views.py.
+
+    - Membuat akun pengguna
+        1. Pengguna 1:
+            username=afero
+            ![alt text](image-6.png)
+
+        2. Pengguna 2:
+            username=haikal
+            ![alt text](image-7.png)
+
+    - Menghubungkan model Product dengan User.
+        1. Pada models.py, import user dan tambahkan model user pada class Product. Kemudian jalankan perintah python manage.py makemigrations dan python manage.py migrate di terminal.
+
+        2. Pada views.py, fungsi create_product(), di dalam blok if form.is_valid() and request.method == 'POST': , ganti isinya dengan :
+
+        product_entry = form.save(commit = False)
+        product_entry.user = request.user
+        product_entry.save()
+        return redirect('main:show_main')
+    
+        Step ini untuk menghubungan product yang baru dibuat dengan user.
+
+        3. Pada views.py, fungsi show_main(), ubah bagian deklarasi product_list dengan :
+        filter_type = request.GET.get("filter", "all")  # default 'all'
+
+        if filter_type == "all":
+            product_list = Product.objects.all()
+        else:
+            product_list = Product.objects.filter(user=request.user)
+
+        lalu tambahkan tombol My dan All di main.html untuk menjalankan fungsi filter.
+        
+        Step ini untuk memfilter bagian produk yang kita buat dan produk orang lain.
+
+    - Menampilkan detail informasi pengguna yang sedang logged in seperti username
+        1. Meletakkan kode ini di main.html:
+            <h5>User sedang login: {{ user }}</h5>
+
+    - Menerapkan cookies seperti informasi last login
+        1. Pada views.py lakukan beberapa import :
+            import datetime
+            from django.http import HttpResponseRedirect
+            from django.urls import reverse
+
+        2. pada fungsi login_user, ubah blok if form.is_valid() dengan :
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                response = HttpResponseRedirect(reverse("main:show_main"))
+                response.set_cookie('last_login', str(datetime.datetime.now()))
+                return response
+
+        3. Pada fungsi show_main, bagian dictionary context, tambahkan :
+            'last_login': request.COOKIES.get('last_login', 'Never')
+
+        4. Pada fungsi logout_user, ubah menjadi :
+            def logout_user(request):
+                logout(request)
+                response = HttpResponseRedirect(reverse('main:login'))
+                response.delete_cookie('last_login')
+                return response
+
+            Step ini untuk menghapus cookie setelah logout.
+
+        5. Pada main.html, tampilkan informasi last_login.
+
+
+        
+
+
 
 
 
