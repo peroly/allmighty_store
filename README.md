@@ -164,9 +164,11 @@ Kekurangan:
 5. Implementasi Checklist
     - Implementasi fungsi registrasi, login, dan logout, serta mengharuskan user untuk login demi mengakses beberapa fungsi.
         1. Import library django yang dibutuhkan untuk registrasi, login, dan logout di views.py .
+            ```
             from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
             from django.contrib.auth import authenticate, login, logout
             from django.contrib.auth.decorators import login_required
+            ```
 
         2. Membuat masing-masing fungsi dari login, register, dan logout di views.py
         3. Membuat tampilan html dari login di login.html, register di register.html, dan logout di main.html .
@@ -185,7 +187,9 @@ Kekurangan:
     - Menghubungkan model Product dengan User.
         1. Pada models.py, import user dan tambahkan model user pada class Product. Kemudian jalankan perintah python manage.py makemigrations dan python manage.py migrate di terminal.
 
-        2. Pada views.py, fungsi create_product(), di dalam blok if form.is_valid() and request.method == 'POST': , ganti isinya dengan :
+        2. Pada views.py, fungsi create_product(), di dalam blok 
+        `if form.is_valid() and request.method == 'POST': `, 
+        ganti isinya dengan :
 
         product_entry = form.save(commit = False)
         product_entry.user = request.user
@@ -195,6 +199,7 @@ Kekurangan:
         Step ini untuk menghubungan product yang baru dibuat dengan user.
 
         3. Pada views.py, fungsi show_main(), ubah bagian deklarasi product_list dengan :
+        ```
         filter_type = request.GET.get("filter", "all")  # default 'all'
 
         if filter_type == "all":
@@ -202,39 +207,48 @@ Kekurangan:
         else:
             product_list = Product.objects.filter(user=request.user)
 
+        ```
+
         lalu tambahkan tombol My dan All di main.html untuk menjalankan fungsi filter.
         
         Step ini untuk memfilter bagian produk yang kita buat dan produk orang lain.
 
     - Menampilkan detail informasi pengguna yang sedang logged in seperti username
         1. Meletakkan kode ini di main.html:
-            <h5>User sedang login: {{ user }}</h5>
-
+          `  <h5>User sedang login: {{ user }}</h5>
+`
     - Menerapkan cookies seperti informasi last login
         1. Pada views.py lakukan beberapa import :
+            ```
             import datetime
             from django.http import HttpResponseRedirect
             from django.urls import reverse
+            ```
 
         2. pada fungsi login_user, ubah blok if form.is_valid() dengan :
+            ```
             if form.is_valid():
                 user = form.get_user()
                 login(request, user)
                 response = HttpResponseRedirect(reverse("main:show_main"))
                 response.set_cookie('last_login', str(datetime.datetime.now()))
                 return response
+            
+            ```
 
         3. Pada fungsi show_main, bagian dictionary context, tambahkan :
-            'last_login': request.COOKIES.get('last_login', 'Never')
+            `'last_login': request.COOKIES.get('last_login', 'Never')`
 
         4. Pada fungsi logout_user, ubah menjadi :
+            ```
             def logout_user(request):
                 logout(request)
                 response = HttpResponseRedirect(reverse('main:login'))
                 response.delete_cookie('last_login')
                 return response
-
+            ```
             Step ini untuk menghapus cookie setelah logout.
+        
 
         5. Pada main.html, tampilkan informasi last_login.
 
