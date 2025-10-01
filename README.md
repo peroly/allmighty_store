@@ -3,7 +3,9 @@ Nama : Afero Aqil Roihan
 NPM  : 2406352304
 Kelas: PBP D
 
-Tugas 2
+#Allmighty Store
+
+##Tugas 2
 
 Cara saya membuat aplikasi main pada django, merouting, dan menghubungan ke PWS:
 1. Membuat virtual environment dan mengunduh Dependencies yang diperlukan.
@@ -41,7 +43,7 @@ Sumber : https://www.geeksforgeeks.org/blogs/top-10-reasons-to-choose-django-fra
 Feedback untuk Tutorial 1: Tidak ada.
 <
 
-Tugas 3
+##Tugas 3
 
 Manfaat Data Delivery :
 - Pengguna mendapat data yang paling terbaru, sehingga tidak tertinggal pada data yang lama.
@@ -115,7 +117,7 @@ XML by ID
 JSON by ID
 ![alt text](image-4.png)
 
-Tugas 4
+##Tugas 4
 
 1. Apa itu Django AuthenticationForm? Jelaskan juga kelebihan dan kekurangannya.
     Django AuthenticationForm adalah form yang sudah disediakan oleh django untuk fitur login user beserta autentikasi yang diperlukan pada proses login tersebut.
@@ -252,6 +254,62 @@ Kekurangan:
 
         5. Pada main.html, tampilkan informasi last_login.
 
+##Tugas 5
+1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!  
+
+    Urutan prioritas:
+    1. Inline styles (Semua hal di dalam tag style)
+    2. ID selectors (Semua hal di dalam tag id)
+    3. Classes selector (Semua hal di dalam tag class)
+    4. Element selector (Contoh : p{}, div{})
+
+2. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa!
+    Responsive web design penting untuk memastikan tampilan website yang kita buat terlihat bagus di setiap perangkat seperti mobile, dekstop, tablet, dan lain-lain.
+    Contoh:
+    1. Sudah Responsive: https://pbp-fasilkom-ui.github.io/, karena tampilannya sudah terlihat rapih di berbagai device seperti mobile dan dekstop.
+    2. Belum Responsive: https://www.bankpapua.co.id/, karena tampilannya tidak rapih jika dibuka dalam mobile
+    Tampilan jika di mobile:
+    ![alt text](image-8.png)
+
+    Tampilan di dekstop:
+    ![alt text](image-9.png)
+
+3. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+    1. Margin : Ruang di luar elemen untuk memberi jarak antar elemen.
+        Contoh implementasi : `margin: 17px;`  jarak = 17 pixel.
+    2. Border : Garis pembatas antara margin dan padding yang berfungsi membungkus elemen.
+        Contoh implementasi : `border: 2px solid black;` border hitam dengan tebal 2 pixel.
+    3. Padding : Ruang antara elemen dan Border.
+        Contoh implementasi : `padding: 9px;` jarak antar border dan element = 9 pixel. 
+
+
+![alt text](image-10.png)
+Sumber: https://blog.hubspot.com/website/css-margin-vs-padding  
+
+4. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+    1. Flex Box: Alat untuk menyusun tata letak elemen pada baris atau kolom (1 dimensi).
+        Contoh kegunaan : Untuk mengatur tata letak navigation bar 
+
+    2. Grid Layout: Alat untuk menyusun tata letak elemen pada baris dan kolom (2 dimensi).
+        Contoh kegunaan : Untuk mengatur tata letak halaman website.
+
+5. Cara menyelesaikan checklist
+
+1. Implementasikan fungsi untuk menghapus dan mengedit product.
+    1. Buat Fungsi edit_product dan delete_product di views.py
+    2. Buat HTML edit_product.html di main/templates.
+    3. Di main/urls.py, import fungsi edit_product dan delete_product dan tambahkan path url kedua fungsi tersebut.
+    4. Tambahkan tombol Edit dan Delete di main.html.
+
+2. Kustomisasi desain dengan CSS
+    1. Membuat global.css dan mengisinya dengan styling .
+    2. Menghubungkannya bersamaan dengan script tailwind ke base.html.
+    3. Kustomisasi halaman login, register, tambah product, edit product, dan detail product dengan menggunakan tailwind CSS.
+    4. Kustomisasi halaman daftar product:
+        - Jika tak ada product, tampilkan gambar.
+        - Jika ada, tampilkan card product dibuat dengan tailwind css.
+    5. Menambahkan tombol edit dan delete pada card product.
+    6. Membuat navigation bar yang juga mempertimbangkan tampilan website pada device mobile, lalu include navigation bar tersebut di main.html. 
 
         
 

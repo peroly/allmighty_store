@@ -1,0 +1,60 @@
+{% load static %}
+<article class="bg-white rounded-xl shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+  <!-- Product Image -->
+  <div class="w-full h-64 overflow-hidden flex items-center justify-center bg-gray-100">
+    {% if product.thumbnail %}
+      <img src="{{ product.thumbnail }}" alt="{{ product.name }}" class="object-cover w-full h-full">
+    {% else %}
+      <div class="w-full h-full bg-gray-200"></div>
+    {% endif %}
+  </div>
+
+  <!-- Content -->
+  <div class="p-5">
+    <!-- Product Title -->
+    <h3 class="text-lg font-semibold text-gray-900">
+      {{ product.name }}
+    </h3>
+
+    <!-- Subtitle (gunakan description singkat) -->
+    <p class="text-sm text-gray-500 mb-2">
+      {{ product.description|truncatewords:4 }}
+    </p>
+
+    <!-- Price -->
+    <p class="text-gray-900 font-medium text-lg mb-3">
+      Price: Rp{{product.price}}
+    </p>
+
+    <!-- Color Options (dummy circle karena variabel warna tidak ada di kode asli) -->
+    <div class="flex items-center space-x-2 mb-4">
+      <span class="w-3 h-3 rounded-full bg-yellow-400 border"></span>
+      <span class="w-3 h-3 rounded-full bg-red-500 border"></span>
+      <span class="w-3 h-3 rounded-full bg-blue-500 border"></span>
+      <span class="w-3 h-3 rounded-full bg-black border"></span>
+    </div>
+
+    <!-- Action Buttons -->
+    {% if user.is_authenticated and product.user == user %}
+      <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+        <a href="{% url 'main:show_product' product.id %}" class="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors">
+          Read more
+        </a>
+        <div class="flex space-x-2">
+          <a href="{% url 'main:edit_product' product.id %}" class="text-gray-600 hover:text-gray-700 text-sm transition-colors">
+            Edit
+          </a>
+          <a href="{% url 'main:delete_product' product.id %}" class="text-red-600 hover:text-red-700 text-sm transition-colors">
+            Delete
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <div class="pt-4 border-t border-gray-100">
+        <a href="{% url 'main:show_product' product.id %}" class="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors">
+          Read more →
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</article>
