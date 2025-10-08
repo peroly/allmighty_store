@@ -3,9 +3,8 @@ Nama : Afero Aqil Roihan
 NPM  : 2406352304
 Kelas: PBP D
 
-#Allmighty Store
-
-##Tugas 2
+# Allmighty Store
+## Tugas 3
 
 Cara saya membuat aplikasi main pada django, merouting, dan menghubungan ke PWS:
 1. Membuat virtual environment dan mengunduh Dependencies yang diperlukan.
@@ -43,7 +42,7 @@ Sumber : https://www.geeksforgeeks.org/blogs/top-10-reasons-to-choose-django-fra
 Feedback untuk Tutorial 1: Tidak ada.
 <
 
-##Tugas 3
+## Tugas 3
 
 Manfaat Data Delivery :
 - Pengguna mendapat data yang paling terbaru, sehingga tidak tertinggal pada data yang lama.
@@ -254,7 +253,7 @@ Kekurangan:
 
         5. Pada main.html, tampilkan informasi last_login.
 
-##Tugas 5
+## Tugas 5
 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!  
 
     Urutan prioritas:
@@ -311,7 +310,28 @@ Sumber: https://blog.hubspot.com/website/css-margin-vs-padding
     5. Menambahkan tombol edit dan delete pada card product.
     6. Membuat navigation bar yang juga mempertimbangkan tampilan website pada device mobile, lalu include navigation bar tersebut di main.html. 
 
-        
+## Tugas 6
+1. Apa perbedaan antara synchronous request dan asynchronous request?
+    - Synchronus Request : browser akan menunggu hingga server mengirimkan respons sebelum melanjutkan eksekusi kode berikutnya.
+    - Asynchronous Request : browser tidak menunggu respons server untuk melanjutkan eksekusi kode.
+
+2. Bagaimana AJAX bekerja di Django (alur request–response)?
+    1. event terjadi di webpage
+    2.  XMLHttpRequest object diciptakan oleh JavaScript oleh dikirimkan ke server
+    3. Server memproses request lalu mengirimkan responnya ke webpage yang lalu dibaca javascript
+    4. Javascript menjalankan perintahnya.
+
+3.  Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+    1. Tidak perlu load halaman 
+    2. User dapat melihat langsung hasil dari perintah yang mereka lakukan, tidak perlu menunggu kiriman dari server 
+    3. Lebih cepat dibandingkan render yang biasa, karena yang dikirimkan hanya data json, bukan seluruh html
+
+4. Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+    1. Kirimkan data login dan password dengan HTTPS bukan HTTP, agar data terenskripsi
+    2. Membatasi jumlah request dari suatu IP untuk mencegah serangan brute force
+
+5. Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+    Dengan menggunakan AJAX, website akan lebih responsif, di mana perintah yang dilakukan oleh user, akan langsung ditampilkan di webpage mereka tanpa menunggu kiriman dari server terlebih dahulu. Sehingga user tidak akan berpikir "kok gak bisa ya?" ketika sebuah website menggunakan AJAX.
 
 
 
