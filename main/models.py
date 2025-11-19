@@ -16,7 +16,6 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField(default=0)
     stock = models.IntegerField(default=0)
-    # product_views = models.PositiveIntegerField(default=0)
     description = models.TextField()
     thumbnail = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='update')
@@ -25,6 +24,15 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+class Book(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+
+class Author(models.Model):
+    bio = models.TextField()
+    books = models.ManyToManyField(Book)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
     # @property
     # def is_news_hot(self):
     #     return self.news_views > 20
@@ -32,3 +40,5 @@ class Product(models.Model):
     # def increment_views(self):
     #     self.product_views += 1
     #     self.save()
+
+    #model baru, 1. book (id, title), 2. author (bio(textfield), books, user)
